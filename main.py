@@ -8,7 +8,7 @@ import random
 class NPC:
 
 
-    def __init__ (self):
+    def __init__ (self, nom, race, espece, profession):
           self.force = self.nombre_alléatoire()
           self.agilité = self.nombre_alléatoire()
           self.constitution = self.nombre_alléatoire()
@@ -21,6 +21,7 @@ class NPC:
           self.espece = espece
           self.point_de_vie = random.randint(1, 20)
           self.profession = profession
+
 
 
     def nombre_alléatoire(self):
@@ -56,7 +57,54 @@ class NPC:
         print('profession', self.profession)
 
 class kobold(NPC):
-    def attaquer(self):
+    def attaquer(self, cible):
+        de5 = random.randint(1, 20)
+
+        if de5 == 20:
+            print("Tu fais 8 degats a l'ennemie")
+            cible.subir_dégats(random.randint(1,8))
+
+        elif de5 == 1:
+            print("attaque manqué")
+
+        else:
+            if de5 > cible.armure:
+                print("Tu fais 8 dégats au Kobold")
+                cible.subir_dégats(random.randint(1, 6))
+            else:
+                print("attaque manqué")
+
+
+
+
+
+    def subir_dégats(self, qté_dommages):
+        self.point_de_vie - qté_dommages
+
+
+class Héro(NPC):
+    def attaquer(self, cible):
+        de5 = random.randint(1, 20)
+
+        if de5 == 20:
+            print("Tu fais 8 degats a l'ennemie")
+            cible.subir_dégats(random.randint(1, 8))
+
+        elif de5 == 1:
+            print("attaque manqué")
+
+        else:
+            if de5 > cible.armure:
+                print("tu fais 6 dégats au Héro")
+                cible.subir_dégats(random.randint(1, 6))
+            else:
+                print("attaque manqué")
+
+    def subir_dégats(self, qté_dommages):
+        self.point_de_vie -= qté_dommages
+
+
+
 
 
 
